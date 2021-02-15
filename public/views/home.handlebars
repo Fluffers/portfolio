@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
-
-    <link id="theme-style" rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    
+    <link id="theme-style" rel="stylesheet" type="text/css" href="public/css/style.css">
 
 </head>
 
@@ -21,11 +21,10 @@
     <div class="notification-wrapper">
         <div class="main-container">
             <div id="notification-bar">
-                <p>Message sent successfully!</p>
+                <p>{{msg}}</p>
             </div>
         </div>
     </div>
-    
     <section class="s1">
         <div class="main-container">
             <div class="greating-wrapper">
@@ -44,7 +43,7 @@
                     </ul>
                 </div>
                 <div class="left-column">
-                    <img id="profile-pic" src="images/profilepic.jpg">
+                    <img id="profile-pic" src="public/img/profilepic.jpg">
                     <h5 style="text-align: center; line-height: 0;">Personalize Theme</h5>
 
                     <div id="theme-options-wrapper">
@@ -78,20 +77,17 @@
             <div class="about-wrapper">
                 <div class="about-me">
                     <h4>MORE ABOUT ME </h4>
-                    <p>My story with web development started with basic HTML5 and CSS3 at my secondary school in 2016
-                        and lasted 3 years.
-                        I picked an IT profile, so soon I also got to experience Javascript, React, Node.js, PHP and
-                        many more.
+                    <p>My story with web development started with basic HTML5 and CSS3 at my secondary school in 2016 and lasted 3 years. 
+                        I picked an IT profile, so soon I also got to experience Javascript, React, Node.js, PHP and many more. 
                     </p>
-                    <p>At the beginning of 2021 I decided to learn more seriously in my free time, while studying Social
-                        Informatics.
+                    <p>At the beginning of 2021 I decided to learn more seriously in my free time, while studying Social Informatics. 
                     </p>
 
                     <hr />
 
                     <h4>MY SKILLS</h4>
                     <p>
-                        Fluent with the left column, had some good experience with right one.
+                        Fluent with the left column, had some good experience with right one. 
                         <!-- <a href="Juszczak_Jakub_resume.pdf" target="_blank">Download Resume</a> -->
                     </p>
 
@@ -109,16 +105,15 @@
                             <li>Node.js</li>
                             <li>Three.js</li>
                             <li>React Native</li>
-
+                            
                         </ul>
                     </div>
                 </div>
                 <div class="social-links">
-                    <img id="social_img" src="images/cute-frog-2.jpg">
+                    <img id="social_img" src="public/img/cute-frog-2.jpg">
                     <h3>Find me on Github & Linkedin</h3>
                     <a href="https://github.com/Fluffers" target="_blank">Github: @Fluffers</a>
-                    <a href="https://www.linkedin.com/in/jakub-juszczak-113b12206/" target="_blank">Linkedin: @Jakub
-                        Juszczak</a>
+                    <a href="https://www.linkedin.com/in/jakub-juszczak-113b12206/" target="_blank">Linkedin: @Jakub Juszczak</a>
                 </div>
             </div>
         </div>
@@ -130,7 +125,7 @@
             <div class="post-wrapper">
                 <div>
                     <div class="post">
-                        <img class="post-thumbnail" src="images/profilepic.jpg">
+                        <img class="post-thumbnail" src="public/img/profilepic.jpg">
                         <div class="post-preview">
                             <h6 class="post-title">Post Title</h6>
                             <p class="post-intro">This is a sentence and im gonna say some more text to change later
@@ -141,7 +136,7 @@
                 </div>
                 <div>
                     <div class="post">
-                        <img class="post-thumbnail" src="images/profilepic.jpg">
+                        <img class="post-thumbnail" src="public/img/profilepic.jpg">
                         <div class="post-preview">
                             <h6 class="post-title">Post Title</h6>
                             <p class="post-intro">This is a sentence and im gonna say some more text to change later
@@ -153,7 +148,7 @@
                 </div>
                 <div>
                     <div class="post">
-                        <img class="post-thumbnail" src="images/profilepic.jpg">
+                        <img class="post-thumbnail" src="public/img/profilepic.jpg">
                         <div class="post-preview">
                             <h6 class="post-title">Post Title</h6>
                             <p class="post-intro">This is a sentence and im gonna say some more text to change later
@@ -170,26 +165,25 @@
     <section class="s2">
         <div class="main-container">
             <h3 style="text-align: center;">Get In Touch</h3>
-
-            <form id="contact-form" action="" method="post">
-                <label>Name</label>
+            <form id="contact-form" method="POST" action="send" method="post">
+                <label >Name</label>
                 <input class="input-field" type="text" name="name">
 
-                <label>Subject</label>
+                <label >Subject</label>
                 <input class="input-field" type="text" name="subject">
 
-                <label>Email</label>
+                <label >Email</label>
                 <input class="input-field" type="text" name="email">
 
-                <label>Message</label>
+                <label >Message</label>
                 <textarea class="input-field" name="message"></textarea>
 
-                <input id="submit-btn" type="submit" value="Send">
+                <input id="submit-btn" type="submit" value="Send" >
             </form>
         </div>
     </section>
 
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="public/scripts/script.js"></script>
 
 </body>
 
