@@ -1,3 +1,5 @@
+// theme handling
+
 let theme = localStorage.getItem('theme')
 
 if (theme == null) {
@@ -29,4 +31,12 @@ function setTheme(mode) {
     }
 
     localStorage.setItem('theme', mode)
+}
+
+// notification handling  
+
+let notification = document.getElementById('notification-bar')
+if(notification.children[0].innerHTML != ""){
+    notification.style.height="initial"; 
+    notification.style.visibility="visible"; 
 }

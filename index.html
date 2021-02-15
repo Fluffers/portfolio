@@ -12,12 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="style.css">
-    
+
     <link id="theme-style" rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 
 <body>
+    <div class="notification-wrapper">
+        <div class="main-container">
+            <div id="notification-bar">
+                <p>Message sent successfully!</p>
+            </div>
+        </div>
+    </div>
+    
     <section class="s1">
         <div class="main-container">
             <div class="greating-wrapper">
@@ -69,46 +77,48 @@
         <div class="main-container">
             <div class="about-wrapper">
                 <div class="about-me">
-                    <h4>More about me </h4>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nunc nibh, egestas sed tincidunt
-                        sit amet, commodo vel mi. Phasellus suscipit neque a purus pellentesque fermentum. Etiam
-                        pellentesque magna dolor, non placerat nibh rutrum vel. Ut gravida nisl ut auctor pellentesque.
-                        In ut efficitur quam, sed sagittis erat. </p>
-
-                    <p>Praesent bibendum interdum nulla vitae consequat. Nullam auctor tempor arcu nec fermentum. Proin
-                        sit amet diam hendrerit, ornare magna at, tincidunt metus. Proin aliquam vel lorem ut pulvinar.
+                    <h4>MORE ABOUT ME </h4>
+                    <p>My story with web development started with basic HTML5 and CSS3 at my secondary school in 2016
+                        and lasted 3 years.
+                        I picked an IT profile, so soon I also got to experience Javascript, React, Node.js, PHP and
+                        many more.
+                    </p>
+                    <p>At the beginning of 2021 I decided to learn more seriously in my free time, while studying Social
+                        Informatics.
                     </p>
 
                     <hr />
 
-                    <h4>MY EXPERTISE</h4>
-
-                    <p>Hard to call someone without comercial experience an expert, isn't it? <a
-                            href="Juszczak_Jakub_resume.pdf" target="_blank">Download Resume</a></p>
+                    <h4>MY SKILLS</h4>
+                    <p>
+                        Fluent with the left column, had some good experience with right one.
+                        <!-- <a href="Juszczak_Jakub_resume.pdf" target="_blank">Download Resume</a> -->
+                    </p>
 
                     <div id="skills">
                         <ul>
                             <li>Python</li>
                             <li>Javascript</li>
-                            <li>PHP</li>
-                            <li>Node.js</li>
                             <li>React</li>
+                            <li>HTML/CSS</li>
+                            <li>Figma</li>
                         </ul>
                         <ul>
-                            <li>Postgres</li>
-                            <li>MySQL</li>
-                            <li>MondoDB</li>
+                            <li>Postgresql</li>
                             <li>Typescript</li>
-                            <li>HTML/CSS</li>
+                            <li>Node.js</li>
+                            <li>Three.js</li>
+                            <li>React Native</li>
+
                         </ul>
                     </div>
                 </div>
                 <div class="social-links">
                     <img id="social_img" src="images/cute-frog-2.jpg">
                     <h3>Find me on Github & Linkedin</h3>
-                    <a href="#" target="_blank">Github: @Fluffers</a>
-                    <a href="#" target="_blank">Linkedin: @Jakub Juszczak</a>
+                    <a href="https://github.com/Fluffers" target="_blank">Github: @Fluffers</a>
+                    <a href="https://www.linkedin.com/in/jakub-juszczak-113b12206/" target="_blank">Linkedin: @Jakub
+                        Juszczak</a>
                 </div>
             </div>
         </div>
@@ -162,19 +172,19 @@
             <h3 style="text-align: center;">Get In Touch</h3>
 
             <form id="contact-form" action="" method="post">
-                <label >Name</label>
+                <label>Name</label>
                 <input class="input-field" type="text" name="name">
 
-                <label >Subject</label>
+                <label>Subject</label>
                 <input class="input-field" type="text" name="subject">
 
-                <label >Email</label>
+                <label>Email</label>
                 <input class="input-field" type="text" name="email">
 
-                <label >Message</label>
+                <label>Message</label>
                 <textarea class="input-field" name="message"></textarea>
 
-                <input id="submit-btn" type="submit" value="Send" >
+                <input id="submit-btn" type="submit" value="Send">
             </form>
         </div>
     </section>
