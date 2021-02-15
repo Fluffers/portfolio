@@ -21,6 +21,7 @@ html,
 body {
     padding: 0;
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 body *{
@@ -134,9 +135,9 @@ textarea {
     border-radius: 5px 5px 0 0;
 }
 
-#navigation a{
+/* #navigation a{
     color:var(--mainText)
-}
+} */
 
 #navigation {
     margin: 0;
@@ -176,6 +177,10 @@ textarea {
 }
 
 #dot-3 {
+    background-color: #2aca3e;
+}
+
+#dot-4 {
     background-color: #2aca3e;
 }
 
@@ -234,6 +239,10 @@ textarea {
 
 #purple-mode {
     background-color: #7e4c74;
+}
+
+#yellow-mode {
+    background-color: #f2cb83;
 }
 
 #settings-note {
@@ -388,6 +397,8 @@ textarea {
 #contact-form textarea {
     min-height: 100px;
     font-size: 14px;
+    max-width:97%;
+    padding:10px;
 }
 
 .input-field {
