@@ -49,6 +49,12 @@ if (params.length > 0) {
     }
 }
 
+// form validation
+const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 // form post contact handling
 document.getElementById("contactForm").addEventListener("submit", (event) => {
     event.preventDefault()
@@ -58,17 +64,20 @@ document.getElementById("contactForm").addEventListener("submit", (event) => {
         obj[key] = val
     });
 
-    fetch('/test', {
-        method: 'post',
-        body: JSON.stringify(obj),
-        headers: {'Content-Type': 'application/json'},
-    })
-        .then(response => response.json())
-        .then(data =>{
-            console.log(data)
+    if (validateEmail(obj.email) && obj.subject.length > 0 && obj.message.length > 0) {
+        fetch('/test', {
+            method: 'post',
+            body: JSON.stringify(obj),
+            headers: { 'Content-Type': 'application/json' },
         })
-        .catch((err) =>{
-            console.log(err)
-        })
-
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }else{
+        console.log("Error sending! Blank data")
+    }
 });

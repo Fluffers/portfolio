@@ -14,6 +14,13 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+// functions
+const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+
 
 // app.get('/', (req, res) => {
 //     // res.render('home', {layout: false});
@@ -85,8 +92,13 @@ app.post('/send', (req, res) => {
 
 app.post('/test', (req, res) => {
     console.log(req.body)
-    res.set('Content-Type', 'text/plain');
-    res.send({data: 'wob wob wob'})
+    if(validateEmail(req.body.email) && req.body.subject.length > 0 && req.body.message.length > 0 ){
+        // there will be sending here
+        
+        res.send({data: 'Email sent successfully!'})
+    }else{
+        res.send({data: 'Email could not be sent due to wrong input!'})
+    }
 })
 
 app.listen(3000, () => { console.log('server started')})
