@@ -1,23 +1,5 @@
 // theme handling
-
-let theme = localStorage.getItem('theme')
-
-if (theme == null) {
-    setTheme('light')
-} else {
-    setTheme(theme)
-}
-
-let themeDots = document.getElementsByClassName('theme-dot')
-
-for (var i = 0; themeDots.length > i; i++) {
-    themeDots[i].addEventListener('click', function () {
-        let mode = this.id.split("-")[0]
-        setTheme(mode)
-    })
-}
-
-function setTheme(mode) {
+setTheme = (mode) => {
     if (mode == "light") {
         document.getElementById('theme-style').href = 'css/style.css'
     } else if (mode == "blue") {
@@ -33,22 +15,60 @@ function setTheme(mode) {
     localStorage.setItem('theme', mode)
 }
 
+let theme = localStorage.getItem('theme')
+if (theme == null) {
+    setTheme('light')
+} else {
+    setTheme(theme)
+}
+
+let themeDots = document.getElementsByClassName('theme-dot')
+for (var i = 0; themeDots.length > i; i++) {
+    themeDots[i].addEventListener('click', function () {
+        let mode = this.id.split("-")[0]
+        setTheme(mode)
+    })
+}
 
 // notification handling  
 let params = window.location.search.substring(1);
 if (params.length > 0) {
     params = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
     let notification = document.getElementById('notification-bar')
- 
+
     if (params["sent"] == 1) {
         notification.children[0].innerHTML = "Message has been sent!"
-    }else if(params["sent"] == 0 ){
+    } else if (params["sent"] == 0) {
         notification.children[0].innerHTML = "Whoops! Message could not be sent!"
-    }else{
+    } else {
         notification.children[0].innerHTML = "Unknown parameters!"
     }
-        if (notification.children[0].innerHTML != "") {
-            notification.style.height = "initial";
-            notification.style.visibility = "visible";
-        }
+    if (notification.children[0].innerHTML != "") {
+        notification.style.height = "initial";
+        notification.style.visibility = "visible";
+    }
 }
+
+// form post contact handling
+document.getElementById("contactForm").addEventListener("submit", (event) => {
+    event.preventDefault()
+    let formData = new FormData(document.forms.contactForm);
+    let obj = {}
+    formData.forEach((val, key) => {
+        obj[key] = val
+    });
+
+    fetch('/test', {
+        method: 'post',
+        body: JSON.stringify(obj),
+        headers: {'Content-Type': 'application/json'},
+    })
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data)
+        })
+        .catch((err) =>{
+            console.log(err)
+        })
+
+});

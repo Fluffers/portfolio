@@ -1,7 +1,5 @@
 // load the necessery stuff
 const express = require('express')
-//const bodyParser = require('body-parser')
-//const exphandlebars = require('express-handlebars')
 const path = require('path')
 const nodemailer = require('nodemailer')
 
@@ -9,27 +7,18 @@ const nodemailer = require('nodemailer')
 // accont credentials are supposed to be in ''.env file
 const acc = require('dotenv').config();
 
-
 const app = express();
-
-// view engine setup
-// app.engine('handlebars', exphandlebars());
-// app.set('view engine', 'handlebars');
 
 // static folder 
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-// body parser middleware
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(bodyParser.json());
 
-
-app.get('/', (req, res) => {
-    // res.render('home', {layout: false});
-    console.log("it's working!")
-});
+// app.get('/', (req, res) => {
+//     // res.render('home', {layout: false});
+//     console.log("it's working!")
+// });
 
 app.post('/send', (req, res) => {
     console.log(req.body);
@@ -92,6 +81,12 @@ app.post('/send', (req, res) => {
         res.redirect("/?sent=0")
     }
 
+})
+
+app.post('/test', (req, res) => {
+    console.log(req.body)
+    res.set('Content-Type', 'text/plain');
+    res.send({data: 'wob wob wob'})
 })
 
 app.listen(3000, () => { console.log('server started')})
