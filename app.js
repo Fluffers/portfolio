@@ -1,7 +1,7 @@
 // load the necessery stuff
 const express = require('express')
-const bodyParser = require('body-parser')
-const exphandlebars =require('express-handlebars')
+//const bodyParser = require('body-parser')
+//const exphandlebars = require('express-handlebars')
 const path = require('path')
 const nodemailer = require('nodemailer')
 
@@ -13,22 +13,22 @@ const acc = require('dotenv').config();
 const app = express();
 
 // view engine setup
-app.engine('handlebars', exphandlebars());
-app.set('view engine', 'handlebars');
+// app.engine('handlebars', exphandlebars());
+// app.set('view engine', 'handlebars');
 
 // static folder 
-app.use('/public', express.static(path.join(__dirname, "public")))
-app.set('views', __dirname + '/public/views');
-
+app.use(express.static(path.join(__dirname, "public")))
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 // body parser middleware
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-    res.render('home', {layout: false});
-
+    // res.render('home', {layout: false});
+    console.log("it's working!")
 });
 
 app.post('/send', (req, res) => {
@@ -36,8 +36,8 @@ app.post('/send', (req, res) => {
 
     if(req.body.email != '' && req.body.message != ''){
         const output = `
-        <p> You have a new home request!</p>
-        <h3> home Details <h3>
+        <p> You have a new Contact Request!</p>
+        <h3> Details <h3>
     
         <ul>
             <li>
@@ -73,19 +73,23 @@ app.post('/send', (req, res) => {
             let info = await transporter.sendMail({
               from: 'Nodemailer home,<'+process.env.EMAIL_NAME+">", // sender address
               to: "kuborok123434@gmail.com",
-              subject: "home Request",
+              subject: "Contact Request",
               text: "",
               html: output,
             });
             console.log("Message sent: %s", info.messageId);
     
-    
-            res.render('home', {layout: false, msg:'Message has been sent!'})
+            
+            //res.render('home', {layout: false, msg:'Message has been sent!'})
+            //res.writeHead(200, {'Content-Type': 'text/html'})
+            res.redirect("/?sent=1")
+
         }
           
         main().catch(console.error);
     }else{
-        res.render('home', {layout: false, msg:'Whoops! Message could not be sent!'})
+        //res.render('home', {layout: false, msg:'Whoops! Message could not be sent!'})
+        res.redirect("/?sent=0")
     }
 
 })

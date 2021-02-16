@@ -19,15 +19,15 @@ for (var i = 0; themeDots.length > i; i++) {
 
 function setTheme(mode) {
     if (mode == "light") {
-        document.getElementById('theme-style').href = 'public/css/style.css'
+        document.getElementById('theme-style').href = 'css/style.css'
     } else if (mode == "blue") {
-        document.getElementById('theme-style').href = 'public/css/blue.css'
+        document.getElementById('theme-style').href = 'css/blue.css'
     } else if (mode == "green") {
-        document.getElementById('theme-style').href = 'public/css/green.css'
+        document.getElementById('theme-style').href = 'css/green.css'
     } else if (mode == "purple") {
-        document.getElementById('theme-style').href = 'public/css/purple.css'
-    }else if (mode == "yellow") {
-        document.getElementById('theme-style').href = 'public/css/yellow.css'
+        document.getElementById('theme-style').href = 'css/purple.css'
+    } else if (mode == "yellow") {
+        document.getElementById('theme-style').href = 'css/yellow.css'
     }
 
     localStorage.setItem('theme', mode)
@@ -35,10 +35,20 @@ function setTheme(mode) {
 
 
 // notification handling  
-
-let notification = document.getElementById('notification-bar')
-console.log(notification)
-if(notification.children[0].innerHTML != ""){
-    notification.style.height="initial"; 
-    notification.style.visibility="visible"; 
+let params = window.location.search.substring(1);
+if (params.length > 0) {
+    params = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
+    let notification = document.getElementById('notification-bar')
+ 
+    if (params["sent"] == 1) {
+        notification.children[0].innerHTML = "Message has been sent!"
+    }else if(params["sent"] == 0 ){
+        notification.children[0].innerHTML = "Whoops! Message could not be sent!"
+    }else{
+        notification.children[0].innerHTML = "Unknown parameters!"
+    }
+        if (notification.children[0].innerHTML != "") {
+            notification.style.height = "initial";
+            notification.style.visibility = "visible";
+        }
 }
