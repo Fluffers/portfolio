@@ -19,7 +19,28 @@ const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+const sendEmail = async (output) => {
+    let transporter = nodemailer.createTransport({
+      host: "s1.ct8.pl",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.EMAIL_NAME,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+  
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: 'Nodemailer home,<'+process.env.EMAIL_NAME+">", // sender address
+      to: "kuborok123434@gmail.com",
+      subject: "Contact Request",
+      text: "",
+      html: output,
+    });
+    console.log("Message sent: %s", info.messageId);
 
+}
 
 
 // app.get('/', (req, res) => {
@@ -28,9 +49,10 @@ const validateEmail = (email) => {
 // });
 
 app.post('/send', (req, res) => {
-    console.log(req.body);
-
-    if(req.body.email != '' && req.body.message != ''){
+    console.log(req.body)
+    if(validateEmail(req.body.email) && req.body.subject.length > 0 && req.body.message.length > 0 ){
+        // there will be sending here
+        
         const output = `
         <p> You have a new Contact Request!</p>
         <h3> Details <h3>
@@ -52,52 +74,13 @@ app.post('/send', (req, res) => {
         ${req.body.message}
         </p>
         `;
-    
-        async function main() {
-    
-            let transporter = nodemailer.createTransport({
-              host: "s1.ct8.pl",
-              port: 587,
-              secure: false, // true for 465, false for other ports
-              auth: {
-                user: process.env.EMAIL_NAME,
-                pass: process.env.EMAIL_PASS,
-              },
-            });
-          
-            // send mail with defined transport object
-            let info = await transporter.sendMail({
-              from: 'Nodemailer home,<'+process.env.EMAIL_NAME+">", // sender address
-              to: "kuborok123434@gmail.com",
-              subject: "Contact Request",
-              text: "",
-              html: output,
-            });
-            console.log("Message sent: %s", info.messageId);
-    
-            
-            //res.render('home', {layout: false, msg:'Message has been sent!'})
-            //res.writeHead(200, {'Content-Type': 'text/html'})
-            res.redirect("/?sent=1")
 
-        }
-          
-        main().catch(console.error);
-    }else{
-        //res.render('home', {layout: false, msg:'Whoops! Message could not be sent!'})
-        res.redirect("/?sent=0")
-    }
+        sendEmail(output)
 
-})
 
-app.post('/test', (req, res) => {
-    console.log(req.body)
-    if(validateEmail(req.body.email) && req.body.subject.length > 0 && req.body.message.length > 0 ){
-        // there will be sending here
-        
         res.send({data: 'Email sent successfully!'})
     }else{
-        res.send({data: 'Email could not be sent due to wrong input!'})
+        res.send({data: 'Email could not be sent due to invalid input!'})
     }
 })
 

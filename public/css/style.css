@@ -21,6 +21,7 @@ html,
 body {
     padding: 0;
     margin: 0;
+    margin-bottom: 30px;
     scroll-behavior: smooth;
     background-color: var(--mainColor);
 }
@@ -401,13 +402,12 @@ textarea {
     min-height: 100px;
     max-height: 300px;
     font-size: 14px;
-    width:96%;
-    max-width: 97%;
+    width: calc(100.5% - 30px);
     padding: 10px;
     border: 1px solid var(--borderColor);
     border-radius: 3px;
     transition: none;
-    resize: vertical; 
+    resize: vertical;
     background-color: var(--secondaryColor);
 }
 
@@ -420,7 +420,7 @@ textarea {
 }
 
 .input-field-wrapper input {
-    width: 95.5%;
+    width: calc(100% - 30px);
     border: none;
     -webkit-appearance: none;
     -ms-appearance: none;
@@ -449,35 +449,35 @@ textarea {
 
 }
 
-.input-field-wrapper input:valid+.input-placeholder, 
+.input-field-wrapper input:valid+.input-placeholder,
 .input-field-wrapper input:focus+.input-placeholder,
-.input-field-wrapper textarea:valid+.input-placeholder, 
-.input-field-wrapper textarea:focus+.input-placeholder
-{
+.input-field-wrapper textarea:valid+.input-placeholder,
+.input-field-wrapper textarea:focus+.input-placeholder {
     left: 6px;
     top: 9px;
     color: var(--mainText);
 }
 
 .notification-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--mainColor);
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
 }
 
 #notification-bar {
-    visibility: hidden;
-    height: 0px;
     width: 100%;
     background-color: var(--secondaryColor);
     border: 1px solid var(--borderColor);
-    border-radius: 0 0 5px 5px;
-
-    -webkit-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
-    box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
 
     display: flex;
     justify-content: space-between;
@@ -489,6 +489,26 @@ textarea {
     font-size: 24px;
 }
 
+#notification-bar span {
+    padding: 10px 30px 10px 30px;
+    font-size: 24px;
+}
+
+#notification-bar span:hover {
+    padding: 10px 30px 10px 30px;
+    font-size: 24px;
+    color: var(--mainText);
+    cursor: pointer;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 
 @media screen and (max-width: 1200px) {

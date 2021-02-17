@@ -49,6 +49,20 @@ if (params.length > 0) {
     }
 }
 
+// notification animation
+const showNotification = (message) => {
+    element = document.getElementById("notification-bar")
+    element.parentElement.parentElement.style.visibility = 'visible';
+    element.parentElement.parentElement.style.opacity = '1';
+    element.children[0].innerHTML = message
+}
+const hideNotification = () => {
+    element = document.getElementById("notification-bar")
+    element.parentElement.parentElement.style.visibility = 'hidden';
+    element.parentElement.parentElement.style.opacity = '0';
+    element.children[0].innerHTML = '&nbsp'
+}
+
 // form functions
 const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -57,6 +71,7 @@ const validateEmail = (email) => {
 
 // form post contact handling
 document.getElementById("contactForm").addEventListener("submit", (event) => {
+    showNotification("Sending...")
     event.preventDefault()
     let formData = new FormData(document.forms.contactForm);
     let obj = {}
@@ -64,20 +79,25 @@ document.getElementById("contactForm").addEventListener("submit", (event) => {
         obj[key] = val
     });
 
-    if (validateEmail(obj.email) && obj.subject.length > 0 && obj.message.length > 0) {
-        fetch('/test', {
-            method: 'post',
-            body: JSON.stringify(obj),
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
+    if (obj.subject.length > 0 && obj.message.length > 0 && obj.name.length > 0) {
+        if (validateEmail(obj.email)) {
+            fetch('/send', {
+                method: 'post',
+                body: JSON.stringify(obj),
+                headers: { 'Content-Type': 'application/json' },
             })
-            .catch((err) => {
-                console.log(err)
-            })
+                .then(response => response.json())
+                .then(data => {
+                    showNotification(data['data'])
+                })
+                .catch((err) => {
+                    showNotification("Unknown error!")
+                    console.log(err)
+                })
+        } else {
+            showNotification("Could not send the message due to wrong email!")
+        }
     } else {
-        console.log("Error sending! Blank data")
+        showNotification("Could not send the message due to missing information!")
     }
 });
