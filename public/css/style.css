@@ -12,7 +12,7 @@
     --previewShadow: #f0ead6;
     --previewBackground: rgba(251, 249, 243, 0.8);
 
-    --buttonColor:black;
+    --buttonColor: black;
 
     --linkColor: #17a2b8;
 }
@@ -25,8 +25,8 @@ body {
     background-color: var(--mainColor);
 }
 
-body *{
-    transition: 0.3s; 
+body * {
+    transition: 0.3s ease;
 }
 
 h1,
@@ -88,14 +88,14 @@ textarea {
     background-color: var(--mainColor);
     border-bottom: 1px solid var(--borderColor);
     overflow: auto;
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
 
 .s2 {
     background-color: var(--secondaryColor);
     border-bottom: 1px solid var(--borderColor);
     overflow: auto;
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
 
 .main-container {
@@ -399,31 +399,75 @@ textarea {
 
 #contactForm textarea {
     min-height: 100px;
+    max-height: 300px;
     font-size: 14px;
-    max-width:97%;
-    padding:10px;
-}
-
-.input-field {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: var(--secondaryColor);
-    border-radius: 5px;
+    width:96%;
+    max-width: 97%;
+    padding: 10px;
     border: 1px solid var(--borderColor);
+    border-radius: 3px;
+    transition: none;
+    resize: vertical; 
+    background-color: var(--secondaryColor);
+}
+
+.input-field-wrapper {
+    position: relative;
     font-size: 14px;
+    padding-top: 20px;
+    margin-bottom: 15px;
+
+}
+
+.input-field-wrapper input {
+    width: 95.5%;
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+    border: 1px solid var(--borderColor);
+    background-color: var(--secondaryColor);
+}
+
+.input-field-wrapper input:focus {
+    border-color: var(--mainText);
 }
 
 
-.notification-wrapper{
-    width:100%;
+
+.input-field-wrapper .input-placeholder {
+    position: absolute;
+    left: 12px;
+    top: 41px;
+    transform: translateY(-50%);
+    color: var(--secondaryText);
+
+}
+
+.input-field-wrapper input:valid+.input-placeholder, 
+.input-field-wrapper input:focus+.input-placeholder,
+.input-field-wrapper textarea:valid+.input-placeholder, 
+.input-field-wrapper textarea:focus+.input-placeholder
+{
+    left: 6px;
+    top: 9px;
+    color: var(--mainText);
+}
+
+.notification-wrapper {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--mainColor);
 }
 
-#notification-bar{
+#notification-bar {
     visibility: hidden;
     height: 0px;
     width: 100%;
@@ -442,7 +486,7 @@ textarea {
 
 #notification-bar p {
     padding: 10px 30px 10px 30px;
-    font-size:24px;
+    font-size: 24px;
 }
 
 
