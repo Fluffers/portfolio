@@ -18,6 +18,8 @@
 }
 
 /* *{
+    /* dodaj kolejne padingi i marginy 
+    box-sizing: border-box;
     padding:0;
     margin:0;
 } */
@@ -57,28 +59,28 @@ ul.navigation,
 }
 
 h1 {
-    font-size: 3.5em;
+    font-size: 3.5rem;
 }
 
 h2 {
-    font-size: 2.25em;
+    font-size: 2.25rem;
 }
 
 h3 {
-    font-size: 1.75em;
+    font-size: 1.75rem;
 }
 
 h4 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     text-transform: uppercase;
 }
 
 h5 {
-    font-size: 1.25em;
+    font-size: 1.25rem;
 }
 
 h6 {
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 p,
@@ -106,9 +108,9 @@ section:nth-child(even) {
 }
 
 .main-container {
-    width: 1200px;
+    width: 95%;
     margin: 0 auto;
-
+    max-width: 1200px;
 }
 
 .main-container h3:nth-child(1) {
@@ -119,7 +121,7 @@ section:nth-child(even) {
     display: flex;
     justify-content: center;
     align-content: center;
-    min-height: 10em;
+    min-height: 10rem;
 }
 
 .intro-wrapper {
@@ -237,28 +239,28 @@ section:nth-child(even) {
     border-width: 5px;
 }
 
-#light-mode {
+.theme-dot[data-theme=light] {
     background-color: #fff;
 }
 
-#blue-mode {
+.theme-dot[data-theme=blue] {
     background-color: #192734;
 }
 
-#green-mode {
+.theme-dot[data-theme=green] {
     background-color: #78866b;
 }
 
-#purple-mode {
+.theme-dot[data-theme=purple] {
     background-color: #7e4c74;
 }
 
-#yellow-mode {
+.theme-dot[data-theme=yellow] {
     background-color: #f2cb83;
 }
 
 .settings-note {
-    font-size: 0.75em;
+    font-size: 0.75rem;
     font-style: italic;
     text-align: center;
 }
@@ -287,7 +289,12 @@ section:nth-child(even) {
 
 }
 
-.preview-corner {
+
+.preview::before,
+.preview::after,
+.preview > :first-child::before,
+.preview > :first-child::after {
+    content: "";
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -296,24 +303,28 @@ section:nth-child(even) {
     position: absolute;
 }
 
-.preview div:nth-of-type(1) {
-    top: -5px;
-    left: -5px;
+.preview::before {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
 }
 
-.preview div:nth-of-type(2) {
-    top: -5px;
-    right: -5px;
+.preview::after {
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
 }
 
-.preview div:nth-of-type(3) {
-    bottom: -5px;
-    left: -5px;
+.preview > :first-child::before {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
 }
 
-.preview div:nth-of-type(4) {
-    bottom: -5px;
-    right: -5px;
+.preview > :first-child::after {
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
 }
 
 .about-wrapper {
@@ -375,7 +386,7 @@ section:nth-child(even) {
 
 .post-intro {
     color: #4b5156;
-    font-size: 0.875em;
+    font-size: 0.875rem;
 }
 
 #submit-btn {
@@ -399,13 +410,13 @@ section:nth-child(even) {
 }
 
 #contactForm label {
-    line-height: 2.7em;
+    line-height: 2.7rem;
 }
 
 #contactForm textarea {
     min-height: 100px;
     max-height: 300px;
-    font-size: 0.875em;
+    font-size: 0.875rem;
     width: calc(100.5% - 30px);
     padding: 10px;
     border: 1px solid var(--borderColor);
@@ -417,7 +428,7 @@ section:nth-child(even) {
 
 .input-field-wrapper {
     position: relative;
-    font-size: 0.875em;
+    font-size: 0.875rem;
     padding-top: 20px;
     margin-bottom: 15px;
 
@@ -433,7 +444,7 @@ section:nth-child(even) {
     padding: 12px;
     border-radius: 3px;
     outline: none;
-    font-size: 0.875em;
+    font-size: 0.875rem;
     border: 1px solid var(--borderColor);
     background-color: var(--secondaryColor);
 }
@@ -488,14 +499,15 @@ section:nth-child(even) {
     align-items: center;
 }
 
-#notification-bar p, #notification-bar span {
+#notification-bar p,
+#notification-bar span {
     padding: 10px 30px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 #notification-bar span:hover {
     padding: 10px 30px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: var(--mainText);
     cursor: pointer;
 }
@@ -510,12 +522,12 @@ section:nth-child(even) {
 }
 
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
     .main-container {
         width: 95%;
 
     }
-}
+} */
 
 @media screen and (max-width: 800px) {
     .intro-wrapper {

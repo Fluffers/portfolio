@@ -28,12 +28,11 @@ const theme = localStorage.getItem('theme')
 setTheme(theme ?? 'light')
 
 const themeDots = document.getElementsByClassName('theme-dot')
-for (var i = 0; themeDots.length > i; i++) {
-    themeDots[i].addEventListener('click', function () {
-        let mode = this.id.split("-")[0]
-        setTheme(mode)
+Array.from(themeDots).forEach(dot => {
+    dot.addEventListener('click', (e) => {
+        setTheme(e.target.dataset.theme)
     })
-}
+});
 
 // notification handling  
 const params = window.location.search.substring(1);
@@ -79,7 +78,7 @@ document.getElementById("contactForm").addEventListener("submit", (event) => {
     event.preventDefault()
     showNotification("Sending...")
     const formData = new FormData(document.forms.contactForm);
-    let obj = {}
+    const obj = {}
     formData.forEach((val, key) => {
         obj[key] = val.trim()
     });
