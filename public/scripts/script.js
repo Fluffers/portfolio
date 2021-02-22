@@ -1,28 +1,33 @@
 // theme handling
-setTheme = (mode) => {
-    if (mode == "light") {
-        document.getElementById('theme-style').href = 'css/style.css'
-    } else if (mode == "blue") {
-        document.getElementById('theme-style').href = 'css/blue.css'
-    } else if (mode == "green") {
-        document.getElementById('theme-style').href = 'css/green.css'
-    } else if (mode == "purple") {
-        document.getElementById('theme-style').href = 'css/purple.css'
-    } else if (mode == "yellow") {
-        document.getElementById('theme-style').href = 'css/yellow.css'
+const setTheme = (mode) => {
+    switch (mode) {
+        case "light":
+            document.getElementById('theme-style').href = 'css/style.css'
+            break;
+        case "blue":
+            document.getElementById('theme-style').href = 'css/blue.css'
+            break;
+        case "green":
+            document.getElementById('theme-style').href = 'css/green.css'
+            break;
+        case "purple":
+            document.getElementById('theme-style').href = 'css/purple.css'
+            break;
+        case "yellow":
+            document.getElementById('theme-style').href = 'css/yellow.css'
+            break;
+        default:
+            console.log("you don't have a style like " + mode + " prepared")
+            break;
     }
 
     localStorage.setItem('theme', mode)
 }
 
-let theme = localStorage.getItem('theme')
-if (theme == null) {
-    setTheme('light')
-} else {
-    setTheme(theme)
-}
+const theme = localStorage.getItem('theme')
+setTheme(theme ?? 'light')
 
-let themeDots = document.getElementsByClassName('theme-dot')
+const themeDots = document.getElementsByClassName('theme-dot')
 for (var i = 0; themeDots.length > i; i++) {
     themeDots[i].addEventListener('click', function () {
         let mode = this.id.split("-")[0]
@@ -31,19 +36,19 @@ for (var i = 0; themeDots.length > i; i++) {
 }
 
 // notification handling  
-let params = window.location.search.substring(1);
+const params = window.location.search.substring(1);
 if (params.length > 0) {
     params = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-    let notification = document.getElementById('notification-bar')
+    const notification = document.getElementById('notification-bar')
 
     if (params["sent"] == 1) {
-        notification.children[0].innerHTML = "Message has been sent!"
+        notification.children[0].textContent = "Message has been sent!"
     } else if (params["sent"] == 0) {
-        notification.children[0].innerHTML = "Whoops! Message could not be sent!"
+        notification.children[0].textContent = "Whoops! Message could not be sent!"
     } else {
-        notification.children[0].innerHTML = "Unknown parameters!"
+        notification.children[0].textContent = "Unknown parameters!"
     }
-    if (notification.children[0].innerHTML != "") {
+    if (notification.children[0].textContent != "") {
         notification.style.height = "initial";
         notification.style.visibility = "visible";
     }
@@ -54,13 +59,13 @@ const showNotification = (message) => {
     element = document.getElementById("notification-bar")
     element.parentElement.parentElement.style.visibility = 'visible';
     element.parentElement.parentElement.style.opacity = '1';
-    element.children[0].innerHTML = message
+    element.children[0].textContent = message
 }
 const hideNotification = () => {
     element = document.getElementById("notification-bar")
     element.parentElement.parentElement.style.visibility = 'hidden';
     element.parentElement.parentElement.style.opacity = '0';
-    element.children[0].innerHTML = '&nbsp'
+    // element.children[0].textContent = '&nbsp'
 }
 
 // form functions
@@ -71,12 +76,12 @@ const validateEmail = (email) => {
 
 // form post contact handling
 document.getElementById("contactForm").addEventListener("submit", (event) => {
-    showNotification("Sending...")
     event.preventDefault()
-    let formData = new FormData(document.forms.contactForm);
+    showNotification("Sending...")
+    const formData = new FormData(document.forms.contactForm);
     let obj = {}
     formData.forEach((val, key) => {
-        obj[key] = val
+        obj[key] = val.trim()
     });
 
     if (obj.subject.length > 0 && obj.message.length > 0 && obj.name.length > 0) {
@@ -101,3 +106,5 @@ document.getElementById("contactForm").addEventListener("submit", (event) => {
         showNotification("Could not send the message due to missing information!")
     }
 });
+
+document.getElementById("notification-close").addEventListener("click", hideNotification)

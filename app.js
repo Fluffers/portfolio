@@ -20,7 +20,7 @@ const validateEmail = (email) => {
     return re.test(String(email).toLowerCase());
 }
 const sendEmail = async (output) => {
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: "s1.ct8.pl",
       port: 587,
       secure: false, // true for 465, false for other ports
@@ -31,7 +31,7 @@ const sendEmail = async (output) => {
     });
   
     // send mail with defined transport object
-    let info = await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: 'Nodemailer home,<'+process.env.EMAIL_NAME+">", // sender address
       to: "kuborok123434@gmail.com",
       subject: "Contact Request",
@@ -50,7 +50,7 @@ const sendEmail = async (output) => {
 
 app.post('/send', (req, res) => {
     console.log(req.body)
-    if(validateEmail(req.body.email) && req.body.subject.length > 0 && req.body.message.length > 0 ){
+    if(validateEmail(req.body.email) && req.body.subject.trim().length > 0 && req.body.message.trim().length > 0 ){
         // there will be sending here
         
         const output = `
